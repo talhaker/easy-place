@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import AddGuestModal from './AddGuestModal.js';
 import GuestList from './GuestList.js';
 import TableList from './TableList.js';
 
@@ -8,12 +10,29 @@ class EasyPlace extends Component {
         this.state = {
             guests: [],
             tables: []
+            // ,
+            // showAddGuestModal: false
         }
     }
 
+    // showAddGuestModal = () => {
+    //     this.setState({ showAddGuestModal: true });
+    // };
+    
+    // hideAddGuestModal = () => {
+    //     this.setState({ showAddGuestModal: false });
+    // };
+
     // Create a new GuestGroup
-    createGuestGrout = () => {
-        // Add code here
+    handleAddGuest = (guestInfo) => {
+        this.setState(prevState => ({
+            guests: prevState
+                .guests
+                .concat(guestInfo)
+            }
+        ));
+
+        console.log('handleAddGuest: ' + guestInfo);
     }
 
     // Delete a GuestGroup from list (not coming)
@@ -54,9 +73,12 @@ class EasyPlace extends Component {
     render() {
         return (
             <div>
-                <h2>Welcome to EasyPlace - the ultimate app for easy planning and seating of your guests!</h2>
+                <h3>Welcome to EasyPlace - the ultimate app for easily seating your guests!</h3>
                 <GuestList guests={this.state.guests} />
-                <TableList guests={this.state.guests} tables={this.state.tables} /> 
+                <TableList guests={this.state.guests} tables={this.state.tables} />
+                <AddGuestModal show={this.state.showAddGuestModal} handleAdd={this.handleAddGuest}>
+                </AddGuestModal>
+
             </div>
         );
     }
