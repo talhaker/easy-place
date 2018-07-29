@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import Guest from './Guest';
+
+// import PropTypes from 'prop-types';
 
 class Table extends Component {
     constructor(props) {
-        super(this.props);
+        super(props);
         this.state = {
             tableSize: 0,
             tableNumber: 0,
             tableName: "",
             category: "",
-            guestGroups: []
+            guests: []
         }
     }
 
-    // Add a guestGroup to table
-    addGuestGroup = () => {
+    // Add a guest to table
+    addGuest = () => {
         // Add code here
     }
 
-    // Remove a guestGroup from table
-    removeGuestGroup = () => {
+    // Remove a guest from table
+    removeGuest = () => {
         // Add code here
     }
 
@@ -30,21 +32,20 @@ class Table extends Component {
             </div>
         );
 
-        const guestGroups = props
+        const guests = this.props
             .guests
             .map((item, index) =>
-                <GuestGroup
+                <Guest
                     key={index}
-                    groupInfo={item}
+                    guestInfo={item}
                 />)
 
         return (
             <div>
                 {displayTableInfo}
-                {guestGroups}
+                {guests}
             </div>
         );
-    }
     }
 }
 
