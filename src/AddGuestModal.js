@@ -18,11 +18,11 @@ class AddGuestModal extends Component {
 
     addGuest = (event) => {
         let guestInfo = {
-            guestName: this.state.guestName,
+            name: this.state.guestName,
             photo: this.state.photo,
             category: this.state.category,
-            confirmedGuests: this.state.confirmedGuests,
-            unconfirmedGuests: this.state.unconfirmedGuests
+            confirmed: this.state.confirmedGuests,
+            unconfirmed: this.state.unconfirmedGuests
         }
 
         this.props.handleAdd(guestInfo)
@@ -38,7 +38,16 @@ class AddGuestModal extends Component {
                         type="text"
                         value={this.state.value}
                         placeholder="Enter guest name"
-                        onChange={(event) => { this.setState({guestNames: event.target.value}) }}
+                        onChange={(event) => { this.setState({guestName: event.target.value}) }}
+                    />
+                    <FormControl.Feedback />
+                    <span><Label>Category</Label></span>
+                    <FormControl
+                        id="names"
+                        type="text"
+                        value={this.state.value}
+                        placeholder="Enter guest category"
+                        onChange={(event) => { this.setState({category: event.target.value}) }}
                     />
                     <FormControl.Feedback />
                     <span><Label>Number of confirmed Guests</Label></span>

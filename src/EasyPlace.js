@@ -23,7 +23,7 @@ class EasyPlace extends Component {
     //     this.setState({ showAddGuestModal: false });
     // };
 
-    // Create a new GuestGroup
+    // Create a new Guest
     handleAddGuest = (guestInfo) => {
         this.setState(prevState => ({
             guests: prevState
@@ -35,13 +35,13 @@ class EasyPlace extends Component {
         console.log('handleAddGuest: ' + guestInfo);
     }
 
-    // Delete a GuestGroup from list (not coming)
-    deleteGuestGrout = () => {
+    // Delete a Guest from list (not coming)
+    deleteGuest = () => {
         // Add code here
     }
 
-    // Edit GuestGroup info
-    editGuestGroupInfo = () => {
+    // Edit Guest info
+    editGuestInfo = () => {
         // Add code here
     }
 
@@ -61,12 +61,12 @@ class EasyPlace extends Component {
     }
 
     // Function used to update local state
-    moveGuestGroupToTable = () => {
+    moveGuestToTable = () => {
         // Add code here
     }
 
     // Function used to update local state
-    removeGuestGroupFromTable = () => {
+    removeGuestFromTable = () => {
         // Add code here
     }
 

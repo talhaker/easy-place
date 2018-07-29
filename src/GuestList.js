@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import GuestGroup from './GuestGroup';
+import Guest from './Guest';
 
 class GuestList extends Component {
-    // Add an existing GuestGroup back (from table) to list
-    addGuestGrout = () => {
+    // Add an existing Guest back (from table) to list
+    addGuest = () => {
         // Add code here
     }
 
-    // Remove an existing GuestGroup (moved to table) from list
-    removeGuestGroup = () => {
+    // Remove an existing Guest (moved to table) from list
+    removeGuest = () => {
         // Add code here
     }
 
     render() {
-        const guestGroups = this.props
+        const guests = this.props
             .guests
             .map((item, index) =>
-                <GuestGroup
+                <Guest
                     key={index}
-                    groupInfo={item}
+                    guestInfo={item}
                 />)
         return (
             <div>
-                {guestGroups}
+                {guests}
             </div>
         );
     }

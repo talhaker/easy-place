@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import GuestGroup from './GuestGroup';
+import Table from './Table';
 
 class TableList extends Component {
     render() {
         const tables = this.props
-            .guests
+            .tables
             .map((item, index) =>
-                <GuestGroup
+                <Table
                     key={index}
                     tableInfo={item}
                 />)
