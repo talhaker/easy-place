@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import AddGuestModal from './AddGuestModal.js';
+import AddTableModal from './AddTableModal.js';
+import AddCategoryModal from './AddCategoryModal.js';
 import GuestList from './GuestList.js';
 import TableList from './TableList.js';
 
@@ -9,19 +11,10 @@ class EasyPlace extends Component {
         super(props);
         this.state = {
             guests: [],
-            tables: []
-            // ,
-            // showAddGuestModal: false
+            tables: [],
+            categories: []
         }
     }
-
-    // showAddGuestModal = () => {
-    //     this.setState({ showAddGuestModal: true });
-    // };
-    
-    // hideAddGuestModal = () => {
-    //     this.setState({ showAddGuestModal: false });
-    // };
 
     // Create a new Guest
     handleAddGuest = (guestInfo) => {
@@ -46,9 +39,17 @@ class EasyPlace extends Component {
     }
 
     // Function used to create a new Table
-    createTable = () => {
-        // Add code here
+    handleAddTable = (tableInfo) => {
+        this.setState(prevState => ({
+            tables: prevState
+                .tables
+                .concat(tableInfo)
+            }
+        ));
+
+        console.log('handleAddTable: ' + tableInfo);
     }
+
 
     // Function used to delete a Table
     deleteTable = () => {
@@ -58,6 +59,18 @@ class EasyPlace extends Component {
     // Edit Table info
     editTableInfo = () => {
         // Add code here
+    }
+
+    // Function used to create a new Table
+    handleAddCategory = (category) => {
+        this.setState(prevState => ({
+            categories: prevState
+                .categories
+                .concat(category)
+            }
+        ));
+
+        console.log('handleAddTable: ' + category);
     }
 
     // Function used to update local state
@@ -73,11 +86,13 @@ class EasyPlace extends Component {
     render() {
         return (
             <div>
-                <h3>Welcome to EasyPlace - the ultimate app for easily seating your guests!</h3>
+                <h1><i>Welcome to EasyPlace</i></h1>
+                <h3><i>The Ultimate App for Easily Seating Your Guests!</i></h3>
                 <GuestList guests={this.state.guests} />
                 <TableList guests={this.state.guests} tables={this.state.tables} />
-                <AddGuestModal show={this.state.showAddGuestModal} handleAdd={this.handleAddGuest}>
-                </AddGuestModal>
+                <AddGuestModal handleAdd={this.handleAddGuest} />
+                <AddTableModal handleAdd={this.handleAddTable} />
+                <AddCategoryModal handleAdd={this.handleAddCategory} />
 
             </div>
         );
