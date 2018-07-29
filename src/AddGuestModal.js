@@ -25,7 +25,7 @@ class AddGuestModal extends Component {
             unconfirmed: this.state.unconfirmedGuests
         }
 
-        this.props.handleAdd(guestInfo)
+        this.props.handleAdd(guestInfo);
     }
 
     modalChildren = () => {
@@ -76,8 +76,6 @@ class AddGuestModal extends Component {
 
 
     render() {
-        // const AddGuestModal = ({ handleClose, show, children }) => {
-        // const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
         return (
             <Popup
                 trigger={<button className="button btn-primary"> Add Guest </button>}

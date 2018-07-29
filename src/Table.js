@@ -4,16 +4,6 @@ import Guest from './Guest';
 // import PropTypes from 'prop-types';
 
 class Table extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            tableSize: 0,
-            tableNumber: 0,
-            tableName: "",
-            category: "",
-            guests: []
-        }
-    }
 
     // Add a guest to table
     addGuest = () => {
@@ -28,11 +18,13 @@ class Table extends Component {
     render() {
         const displayTableInfo = (
             <div>
-                <h4>Table {this.props.tableInfo.name}:</h4>
+                <h3>Table {this.props.tableInfo.tableName}</h3>
+                <h4>Size {this.props.tableInfo.tableSize}, Category {this.props.tableInfo.category}</h4>
             </div>
         );
 
         const guests = this.props
+            .tableInfo
             .guests
             .map((item, index) =>
                 <Guest
