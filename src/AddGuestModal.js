@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Label, FormControl, Button, Row, Col } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Label, Button, Row, Col } from 'react-bootstrap';
 import Popup from "reactjs-popup";
 import './Popup.css';
 
@@ -25,10 +25,27 @@ class AddGuestModal extends Component {
             unconfirmed: this.state.unconfirmedGuests
         }
 
+        this.setState({
+            guestName: "",
+            photo: "",
+            category: "",
+            confirmedGuests: 0,
+            unconfirmedGuests: 0
+        });
+
         this.props.handleAdd(guestInfo);
     }
 
     modalChildren = () => {
+        const options = this.props
+            .categories
+            .sort()
+            .map((category, index) =>
+                <option key={index} value={category}>
+                    {category}
+                </option>
+        );
+
         return (
             <div>
                 <form className="modal-main">
@@ -42,14 +59,17 @@ class AddGuestModal extends Component {
                     />
                     <FormControl.Feedback />
                     <span><Label>Category</Label></span>
-                    <FormControl
-                        id="names"
-                        type="text"
-                        value={this.state.value}
-                        placeholder="Enter guest category"
-                        onChange={(event) => { this.setState({category: event.target.value}) }}
-                    />
-                    <FormControl.Feedback />
+                    <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Category</ControlLabel>
+                        <FormControl
+                            componentClass="select" placeholder="Select category"
+                            inputRef={ el => this.inputEl = el }
+                            onChange={(event) => { this.setState({category: this.inputEl.value}) }}
+                            >
+                            <option value="select">Select category</option>
+                            {options}
+                        </FormControl>
+                    </FormGroup>
                     <span><Label>Number of confirmed Guests</Label></span>
                     <FormControl
                         id="confirmedGuests"
@@ -73,7 +93,6 @@ class AddGuestModal extends Component {
             </div>
         );
     }
-
 
     render() {
         return (

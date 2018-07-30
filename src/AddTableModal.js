@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Label, FormControl, Button, Row, Col } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Label, Button, Row, Col } from 'react-bootstrap';
+import 'react-select/dist/react-select.css';
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 import Popup from "reactjs-popup";
 import './Popup.css';
 
@@ -22,10 +25,26 @@ class AddTableModal extends Component {
             guests: this.state.guests
         }
 
+        this.setState({
+            tableName: "",
+            tableSize: 8,
+            category: "",
+            guests: []
+        });
+
         this.props.handleAdd(tableInfo);
     }
 
     modalChildren = () => {
+        const options = this.props
+            .categories
+            .sort()
+            .map((category, index) =>
+                <option key={index} value={category}>
+                    {category}
+                </option>
+        );
+
         return (
             <div>
                 <form className="modal-main">
@@ -47,15 +66,17 @@ class AddTableModal extends Component {
                         onChange={(event) => { this.setState({tableSize: event.target.value}) }}
                     />
                     <FormControl.Feedback />
-                    <span><Label>Category</Label></span>
-                    <FormControl
-                        id="category"
-                        type="text"
-                        value={this.state.value}
-                        placeholder="Enter table category"
-                        onChange={(event) => { this.setState({category: event.target.value}) }}
-                    />
-                    <FormControl.Feedback />
+                    <FormGroup controlId="formControlsSelect">
+                        <ControlLabel>Category</ControlLabel>
+                        <FormControl
+                            componentClass="select" placeholder="Select category"
+                            inputRef={ el => this.inputEl = el }
+                            onChange={(event) => { this.setState({category: this.inputEl.value}) }}
+                            >
+                            <option value="select">Select category</option>
+                            {options}
+                        </FormControl>
+                    </FormGroup>
                     <Button bsStyle="primary" onClick={this.addTable}>Add to table list</Button>
                 </form>
             </div>

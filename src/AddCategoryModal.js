@@ -13,6 +13,8 @@ class AddCategoryModal extends Component {
 
     addCategory = () => {
         this.props.handleAdd(this.state.category);
+
+        this.setState({ category: "" });
     }
 
     modalChildren = () => {
