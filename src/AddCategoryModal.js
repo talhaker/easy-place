@@ -12,9 +12,9 @@ class AddCategoryModal extends Component {
     }
 
     addCategory = () => {
-        this.props.handleAdd(this.state.category);
+        let category = this.state.category;
 
-        this.setState({ category: "" });
+        this.setState({ category: "" }, () => this.props.handleAdd(category));
     }
 
     modalChildren = () => {
@@ -42,10 +42,10 @@ class AddCategoryModal extends Component {
             <Popup
                 trigger={<button className="button btn-primary">Add Category</button>}
                 modal
+                children={this.modalChildren()}
                 closeOnDocumentClick
-            >
-                {this.modalChildren()}
-            </Popup>
+                closeOnEscape
+            />
         );
     }
 }

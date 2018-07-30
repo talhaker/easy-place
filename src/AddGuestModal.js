@@ -31,9 +31,9 @@ class AddGuestModal extends Component {
             category: "",
             confirmedGuests: 0,
             unconfirmedGuests: 0
-        });
+        }, () => this.props.handleAdd(guestInfo));
 
-        this.props.handleAdd(guestInfo);
+        ;
     }
 
     modalChildren = () => {
@@ -58,7 +58,6 @@ class AddGuestModal extends Component {
                         onChange={(event) => { this.setState({guestName: event.target.value}) }}
                     />
                     <FormControl.Feedback />
-                    <span><Label>Category</Label></span>
                     <FormGroup controlId="formControlsSelect">
                         <ControlLabel>Category</ControlLabel>
                         <FormControl
@@ -99,10 +98,10 @@ class AddGuestModal extends Component {
             <Popup
                 trigger={<button className="button btn-primary"> Add Guest </button>}
                 modal
+                children={this.modalChildren()}
                 closeOnDocumentClick
-            >
-                {this.modalChildren()}
-            </Popup>
+                closeOnEscape
+            />
         );
     }
 }

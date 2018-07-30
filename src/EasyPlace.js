@@ -83,6 +83,30 @@ class EasyPlace extends Component {
         // Add code here
     }
 
+    componentWillMount = () => {
+        // Fetch state from local storage
+        localStorage.getItem('guests') && this.setState({
+            'guests': JSON.parse(localStorage.getItem('guests')),
+            isLoading: false
+        });
+        localStorage.getItem('tables') && this.setState({
+            'tables': JSON.parse(localStorage.getItem('tables')),
+            isLoading: false
+        });
+        localStorage.getItem('categories') && this.setState({
+            'categories': JSON.parse(localStorage.getItem('categories')),
+            isLoading: false
+        });
+    }
+
+    componentWillUpdate = (nextProps, nextState) => {
+        // Save state to local storage
+        localStorage.setItem('guests', JSON.stringify(nextState.guests));
+        localStorage.setItem('tables', JSON.stringify(nextState.tables));
+        localStorage.setItem('categories', JSON.stringify(nextState.categories));
+        localStorage.setItem('timestamp', Date.now());
+    }
+
     render() {
         return (
             <div>
