@@ -90,9 +90,9 @@ class EasyPlace extends Component {
                 <h3><i>The Ultimate App for Easily Seating Your Guests!</i></h3>
                 <GuestList guests={this.state.guests} />
                 <TableList guests={this.state.guests} tables={this.state.tables} />
-                <AddGuestModal handleAdd={this.handleAddGuest} />
-                <AddTableModal handleAdd={this.handleAddTable} />
-                <AddCategoryModal handleAdd={this.handleAddCategory} />
+                <AddGuestModal handleAdd={this.handleAddGuest} categories={this.state.categories} />
+                <AddTableModal handleAdd={this.handleAddTable} categories={this.state.categories} />
+                <AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} />
 
             </div>
         );
