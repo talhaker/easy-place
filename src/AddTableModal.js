@@ -30,9 +30,7 @@ class AddTableModal extends Component {
             tableSize: 8,
             category: "",
             guests: []
-        });
-
-        this.props.handleAdd(tableInfo);
+        }, () => this.props.handleAdd(tableInfo));
     }
 
     modalChildren = () => {
@@ -89,10 +87,10 @@ class AddTableModal extends Component {
             <Popup
                 trigger={<button className="button btn-primary">Add Table</button>}
                 modal
+                children={this.modalChildren()}
                 closeOnDocumentClick
-            >
-                {this.modalChildren()}
-            </Popup>
+                closeOnEscape
+            />
         );
     }
 }
