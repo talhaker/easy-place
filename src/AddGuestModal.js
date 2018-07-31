@@ -31,9 +31,20 @@ class AddGuestModal extends Component {
             category: "",
             confirmedGuests: 0,
             unconfirmedGuests: 0
-        }, () => this.props.handleAdd(guestInfo));
+        });
+        this.props.handleAdd(guestInfo);
+    }
 
-        ;
+    handleTextChange = event => {
+        this.setState({[event.target.id]: event.target.value})
+    }
+
+    categoryReference = elem => {
+        this.inputElem = elem;
+    }
+
+    categoryChange = (event) => {
+        this.setState({ category: this.inputElem.value });
     }
 
     modalChildren = () => {
@@ -51,19 +62,22 @@ class AddGuestModal extends Component {
                 <form className="modal-main">
                     <span><Label>Guest name</Label></span>
                     <FormControl
-                        id="names"
+                        id="guestName"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.guestName}
                         placeholder="Enter guest name"
-                        onChange={(event) => { this.setState({guestName: event.target.value}) }}
+                        onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
-                    <FormGroup controlId="formControlsSelect">
+                    <FormGroup>
                         <ControlLabel>Category</ControlLabel>
                         <FormControl
-                            componentClass="select" placeholder="Select category"
-                            inputRef={ el => this.inputEl = el }
-                            onChange={(event) => { this.setState({category: this.inputEl.value}) }}
+                            id="category"
+                            type="text"
+                            componentClass="select"
+                            placeholder="Select category"
+                            inputRef={this.categoryReference}
+                            onChange={this.categoryChange}
                             >
                             <option value="select">Select category</option>
                             {options}
@@ -73,18 +87,18 @@ class AddGuestModal extends Component {
                     <FormControl
                         id="confirmedGuests"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.confirmedGuests}
                         placeholder="Enter number of confirmed Guests"
-                        onChange={(event) => { this.setState({confirmedGuests: event.target.value}) }}
+                        onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
                     <span><Label>Number of unconfirmed Guests</Label></span>
                     <FormControl
                         id="unconfirmedGuests"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.unconfirmedGuests}
                         placeholder="Enter number of unconfirmed Guests"
-                        onChange={(event) => { this.setState({unconfirmedGuests: event.target.value}) }}
+                        onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
                     <Button bsStyle="primary" onClick={this.addGuest}>Add to guest list</Button>

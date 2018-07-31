@@ -17,6 +17,10 @@ class AddCategoryModal extends Component {
         this.setState({ category: "" }, () => this.props.handleAdd(category));
     }
 
+    handleTextChange = event => {
+        this.setState({[event.target.id]: event.target.value})
+    }
+
     modalChildren = () => {
         return (
             <div>
@@ -27,7 +31,7 @@ class AddCategoryModal extends Component {
                         type="text"
                         value={this.state.value}
                         placeholder="Enter table category"
-                        onChange={(event) => { this.setState({category: event.target.value}) }}
+                        onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
                     <Button bsStyle="primary" onClick={this.addCategory}>Add category</Button>

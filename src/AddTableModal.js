@@ -11,7 +11,7 @@ class AddTableModal extends Component {
         super(props);
         this.state = {
             tableName: "",
-            tableSize: 8,
+            tableSize: 12,
             category: "",
             guests: []
         }
@@ -25,12 +25,25 @@ class AddTableModal extends Component {
             guests: this.state.guests
         }
 
+        this.props.handleAdd(tableInfo);
         this.setState({
             tableName: "",
-            tableSize: 8,
+            tableSize: 12,
             category: "",
             guests: []
-        }, () => this.props.handleAdd(tableInfo));
+        });
+    }
+
+    handleTextChange = event => {
+        this.setState({[event.target.id]: event.target.value})
+    }
+
+    categoryReference = elem => {
+        this.inputElem = elem;
+    }
+
+    categoryChange = (event) => {
+        this.setState({ category: this.inputElem.value });
     }
 
     modalChildren = () => {
@@ -50,26 +63,29 @@ class AddTableModal extends Component {
                     <FormControl
                         id="tableName"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.tableName}
                         placeholder="Enter table name"
-                        onChange={(event) => { this.setState({tableName: event.target.value}) }}
+                        onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
                     <span><Label>Table size</Label></span>
                     <FormControl
                         id="tableSize"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.tableSize}
                         placeholder="Enter table size"
-                        onChange={(event) => { this.setState({tableSize: event.target.value}) }}
+                        onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
-                    <FormGroup controlId="formControlsSelect">
+                    <FormGroup>
                         <ControlLabel>Category</ControlLabel>
                         <FormControl
-                            componentClass="select" placeholder="Select category"
-                            inputRef={ el => this.inputEl = el }
-                            onChange={(event) => { this.setState({category: this.inputEl.value}) }}
+                            id="category"
+                            type="text"
+                            componentClass="select"
+                            placeholder="Select category"
+                            inputRef={this.categoryReference}
+                            onChange={this.categoryChange}
                             >
                             <option value="select">Select category</option>
                             {options}
