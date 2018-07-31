@@ -1,3 +1,45 @@
+
+html{ height: 100% }
+body{
+  /* background-image: url('./mosaic-danc.jpg'); */
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: RobotoDraft, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.teble-canvas{
+  background-image: url('./mosaic-danc.jpg');
+  background-color: brown;
+	position: absolute;
+	top: 0;
+	left: 300px;
+	right: 0;
+	bottom: 0;
+	min-width: 300px;
+}
+.sidebar{
+	background-color: slateblue;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 460px;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26);
+	display: flex;
+	flex-direction: column;
+}
+header{
+	cursor: default;
+	padding: 12px 15px;
+	color: #fff;
+	background-color: #259B24;
+}
+header h1{
+	font-size: 1.4em;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+}
 .App {
   text-align: center;
 }
@@ -7,8 +49,11 @@
   height: 80px;
 }
 
+/*background-image: url('../public/mosaic-danc.jpg');*/
+
 .App-header {
-  background-color: #222;
+ 
+  /* background-image: url('./mosaic-danc.jpg'); */
   height: 150px;
   padding: 20px;
   color: white;
@@ -20,6 +65,14 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-body{
+  /* background-image: url('./mosaic-danc.jpg'); */
+	height:209x;
+	margin: 0;
+	padding: 0;
+	font-family: RobotoDraft, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 @keyframes App-logo-spin {

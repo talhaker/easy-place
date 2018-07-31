@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
-
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import AlertDialogSlide from './addGroup';
+import FloatingActionButtonZoom from './ActionButtons';
 import AddGuestModal from './AddGuestModal.js';
 import GuestList from './GuestList.js';
 import TableList from './TableList.js';
+import './App.css';
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        alignContent: 'left',
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+
+    },
+});
 
 class EasyPlace extends Component {
     constructor(props) {
@@ -18,7 +36,7 @@ class EasyPlace extends Component {
     // showAddGuestModal = () => {
     //     this.setState({ showAddGuestModal: true });
     // };
-    
+
     // hideAddGuestModal = () => {
     //     this.setState({ showAddGuestModal: false });
     // };
@@ -29,7 +47,7 @@ class EasyPlace extends Component {
             guests: prevState
                 .guests
                 .concat(guestInfo)
-            }
+        }
         ));
 
         console.log('handleAddGuest: ' + guestInfo);
@@ -70,18 +88,40 @@ class EasyPlace extends Component {
         // Add code here
     }
 
+
+
     render() {
+        const { classes } = this.props;
         return (
             <div>
-                <h3>Welcome to EasyPlace - the ultimate app for easily seating your guests!</h3>
-                <GuestList guests={this.state.guests} />
-                <TableList guests={this.state.guests} tables={this.state.tables} />
-                <AddGuestModal show={this.state.showAddGuestModal} handleAdd={this.handleAddGuest}>
-                </AddGuestModal>
+                <div className="sidebar" >
+                    <header>
+                        <h1>Easy Place</h1>
+                    </header>
+                    <Paper className={classes.paper}>
+                        <FloatingActionButtonZoom></FloatingActionButtonZoom>
+                    </Paper>
+                    {/* <Grid container spacing={3}>
+                        <Grid item xs={1}>
+                            
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Paper className={classes.paper}>
+                                <AddGuestModal show={this.state.showAddGuestModal} handleAdd={this.handleAddGuest} />
+                            </Paper>
+                        </Grid>
 
-            </div>
+                    </Grid> */}
+                    <GuestList guests={this.state.guests} />
+                </div>
+
+                <div className="teble-canvas" >
+                    <TableList guests={this.state.guests} tables={this.state.tables} />
+                </div>
+            </div >
         );
     }
 }
 
-export default EasyPlace;
+export default withStyles(styles)(EasyPlace);
+//export default EasyPlace;
