@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-// import { Label, FormControl, Button, Row, Col } from 'react-bootstrap';
-// import Popup from "reactjs-popup";
-// import './Popup.css';
-
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -31,16 +27,21 @@ const styles = theme => ({
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
         width: 200,
+        fontSize: 15
     },
     menu: {
         width: 200,
     },
     button: {
-        margin: theme.spacing.unit
+        margin: theme.spacing.unit,
+        width: 160
     },
     extendedIcon: {
         marginRight: theme.spacing.unit
-    }
+    },
+    iconSmall: {
+        fontSize: 15,
+      }
 });
 
 function Transition(props) {
@@ -52,7 +53,6 @@ class AddGuestModal extends Component {
         super(props);
         this.state = {
             open: false,
-
             // guestNames: [],
             guestName: "",
             photo: "",
@@ -60,15 +60,7 @@ class AddGuestModal extends Component {
             confirmedGuests: 0,
             unconfirmedGuests: 0
         }
-    }
-
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
+    }  
 
     addGuest = (event) => {
         let guestInfo = {
@@ -84,13 +76,22 @@ class AddGuestModal extends Component {
             photo: "",
             category: "",
             confirmedGuests: 0,
-            unconfirmedGuests: 0
+            unconfirmedGuests: 0,
+            open: false
         });
-        this.props.handleAdd(guestInfo);
+        this.props.handleAddGuest(guestInfo);
     }
 
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
+
     handleTextChange = event => {
-        this.setState({[event.target.id]: event.target.value})
+        this.setState({ [event.target.id]: event.target.value })
     }
 
     categoryReference = elem => {
@@ -157,7 +158,7 @@ class AddGuestModal extends Component {
     //                 <FormControl.Feedback />
     //                 <Button bsStyle="primary" onClick={this.addGuest}>Add to guest list</Button>
     //             </form>
-   
+
     //          </div>
     //      );
     //  }
@@ -183,62 +184,61 @@ class AddGuestModal extends Component {
                         <form className={classes.container} noValidate autoComplete="off">
                             <TextField
                                 required
-                                id="name"
+                                id="guestName"
                                 label="Guest name"
                                 type="text"
                                 className={classes.textField}
-                                value={this.state.value}
+                                value={this.state.guestName}
                                 helperText="Some important text"
                                 placeholder="Enter guest name"
-                                //onChange={(event) => { this.setState({guestName: event.target.value}) }} 
-                                //onChange={this.handleChange('name')}
+                                onChange={this.handleTextChange}
                                 margin="normal" />
                             <TextField
                                 required
-                                id="Category"
-                                label="Category"
-                                type="text"
                                 select
+                                id="Category"
+                                label="Category of guest"
+                                type="text"
                                 className={classes.textField}
-                                // value={this.state.value}
-                                placeholder="Enter guest category"
-                                // onChange={(event) => { this.setState({category: event.target.value}) }}
+                                value={this.state.category}
+                                placeholder="Select category"
+                                onChange={this.categoryChange}
                                 SelectProps={{
                                     MenuProps: {
                                         className: classes.menu,
                                     },
                                 }}
                                 margin="normal">
-                                {/* {currencies.map(option => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))} */}
+                                {this.props.categories
+                                    .sort().map((category, index) => 
+                                        <MenuItem key={index} value={category}>
+                                            {category}
+                                        </MenuItem>
+                                    )}
                             </TextField>
                             <TextField
                                 id="confirmedGuests"
                                 label="confirmed Guests"
                                 type="number"
-                                value={this.state.value}
+                                value={this.state.confirmedGuests}
                                 placeholder="Enter number"
-                                //  onChange={(event) => { this.setState({ confirmedGuests: event.target.value }) }}
-
+                                onChange={this.handleTextChange}
                                 className={classes.textField}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                                 margin="normal" />
                             <TextField
-                                id="number"
+                                id="unconfirmedGuests"
                                 label="unconfirmed Guests"
                                 type="number"
-                                value={this.state.value}
+                                value={this.state.unconfirmedGuests}
                                 placeholder="Enter number"
                                 className={classes.textField}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                                //onChange={(event) => { this.setState({unconfirmedGuests: event.target.value}) }}
+                                onChange={this.handleTextChange}
                                 margin="normal" />
                             {/* <TextField
           id="search"
@@ -254,7 +254,7 @@ class AddGuestModal extends Component {
                         <Button onClick={this.handleClose} color="primary">
                             Cancel
             </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.addGuest} color="primary">
                             Add
             </Button>
                     </DialogActions>
@@ -264,8 +264,6 @@ class AddGuestModal extends Component {
 
     }
 
-
-
     render() {
         const { classes } = this.props;
         // const AddGuestModal = ({ handleClose, show, children }) => {
@@ -274,15 +272,15 @@ class AddGuestModal extends Component {
             <div>
                 <div>
                     <Button
-                        variant="extendedFab"
+                        variant="contained"
                         color="primary"
-                        aria-label="Add"
+                        aria-label="add Category "
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <AddIcon className={classes.extendedIcon} />
-                        add guest </Button>
+                        <AddIcon className={classes.iconSmall} />
+                        Add Guest </Button>
                 </div>
-{this.dialogChildren()}
+                {this.dialogChildren()}
             </div>
             // <Popup
             //     trigger={<button className="button btn-primary"> Add Guest </button>}

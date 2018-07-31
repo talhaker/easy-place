@@ -135,7 +135,7 @@ class EasyPlace extends Component {
                     <header>
                         <h1>Easy Place</h1>
                     </header>
-                      <ActionRegion/>
+                      <ActionRegion handleAddGuest={this.handleAddGuest} handleAddCategory={this.handleAddCategory} categories={this.state.categories} />
                     
                     {/* <Grid container spacing={3}>
                         <Grid item xs={1}>

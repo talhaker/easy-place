@@ -13,8 +13,8 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import green from '@material-ui/core/colors/green';
-import AlertDialogSlide from './addGroup';
 import AddGuestModal from './AddGuestModal';
+import AddCategoryModal from './AddCategoryModal.js';
 
 function TabContainer(props) {
   const { children, dir } = props;
@@ -40,8 +40,8 @@ const styles = theme => ({
   },
   fab: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
+    bottom: theme.spacing.unit,
+    right: theme.spacing.unit,
   },
   fabGreen: {
     color: theme.palette.common.white,
@@ -107,7 +107,8 @@ class ActionRegion extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer dir={theme.direction}>
-          <AddGuestModal/>
+          <AddGuestModal  handleAddGuest={this.props.handleAddGuest} categories={this.props.categories}/>
+          <AddCategoryModal handleAddCategory={this.props.handleAddCategory} categories={this.props.categories}></AddCategoryModal>
           </TabContainer>
           <TabContainer dir={theme.direction}>Tebles</TabContainer>
         </SwipeableViews>
