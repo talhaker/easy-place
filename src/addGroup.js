@@ -1,8 +1,4 @@
-import React, { Component } from 'react';
-// import { Label, FormControl, Button, Row, Col } from 'react-bootstrap';
-// import Popup from "reactjs-popup";
-// import './Popup.css';
-
+import React from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -21,6 +17,7 @@ import NavigationIcon from "@material-ui/icons/Navigation";
 
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+
 
 const styles = theme => ({
     container: {
@@ -42,25 +39,29 @@ const styles = theme => ({
         marginRight: theme.spacing.unit
     }
 });
+const currencies = [
+    {
+        value: 'USD',
+        label: 'Work Team',
+    },    
+    {
+        value: 'BTC',
+        label: 'famliy',
+    },
+    {
+        value: 'JPY',
+        label: 'friends',
+    },
+];
 
 function Transition(props) {
     return <Slide direction="up" {...props} />;
 }
 
-class AddGuestModal extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: false,
-
-            // guestNames: [],
-            guestName: "",
-            photo: "",
-            category: "",
-            confirmedGuests: 0,
-            unconfirmedGuests: 0
-        }
-    }
+class AlertDialogSlide extends React.Component {
+    state = {
+        open: false
+    };
 
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -70,102 +71,18 @@ class AddGuestModal extends Component {
         this.setState({ open: false });
     };
 
-    addGuest = (event) => {
-        let guestInfo = {
-            name: this.state.guestName,
-            photo: this.state.photo,
-            category: this.state.category,
-            confirmed: this.state.confirmedGuests,
-            unconfirmed: this.state.unconfirmedGuests
-        }
-
-        this.setState({
-            guestName: "",
-            photo: "",
-            category: "",
-            confirmedGuests: 0,
-            unconfirmedGuests: 0
-        });
-        this.props.handleAdd(guestInfo);
-    }
-
-    handleTextChange = event => {
-        this.setState({[event.target.id]: event.target.value})
-    }
-
-    categoryReference = elem => {
-        this.inputElem = elem;
-    }
-
-    categoryChange = (event) => {
-        this.setState({ category: this.inputElem.value });
-    }
-
-    // modalChildren = () => {
-    //     const options = this.props
-    //         .categories
-    //         .sort()
-    //         .map((category, index) =>
-    //             <option key={index} value={category}>
-    //                 {category}
-    //             </option>
-    //     );
-
-    //     return (
-    //         <div>
-    //             <form className="modal-main">
-    //                 <span><Label>Guest name</Label></span>
-    //                 <FormControl
-    //                     id="guestName"
-    //                     type="text"
-    //                     value={this.state.guestName}
-    //                     placeholder="Enter guest name"
-    //                     onChange={this.handleTextChange}
-    //                 />
-    //                 <FormControl.Feedback />
-    //                 <FormGroup>
-    //                     <ControlLabel>Category</ControlLabel>
-    //                     <FormControl
-    //                         id="category"
-    //                         type="text"
-    //                         componentClass="select"
-    //                         placeholder="Select category"
-    //                         inputRef={this.categoryReference}
-    //                         onChange={this.categoryChange}
-    //                         >
-    //                         <option value="select">Select category</option>
-    //                         {options}
-    //                     </FormControl>
-    //                 </FormGroup>
-    //                 <span><Label>Number of confirmed Guests</Label></span>
-    //                 <FormControl
-    //                     id="confirmedGuests"
-    //                     type="text"
-    //                     value={this.state.confirmedGuests}
-    //                     placeholder="Enter number of confirmed Guests"
-    //                     onChange={this.handleTextChange}
-    //                 />
-    //                 <FormControl.Feedback />
-    //                 <span><Label>Number of unconfirmed Guests</Label></span>
-    //                 <FormControl
-    //                     id="unconfirmedGuests"
-    //                     type="text"
-    //                     value={this.state.unconfirmedGuests}
-    //                     placeholder="Enter number of unconfirmed Guests"
-    //                     onChange={this.handleTextChange}
-    //                 />
-    //                 <FormControl.Feedback />
-    //                 <Button bsStyle="primary" onClick={this.addGuest}>Add to guest list</Button>
-    //             </form>
-   
-    //          </div>
-    //      );
-    //  }
-
-    dialogChildren = () => {
+    render() {
         const { classes } = this.props;
         return (
             <div>
+                <Button
+                    variant="extendedFab"
+                    color="primary"
+                    aria-label="Add"
+                    className={classes.button}
+                    onClick={this.handleClickOpen}>
+                    <AddIcon className={classes.extendedIcon} />
+                    add guest </Button>
                 <Dialog
                     open={this.state.open}
                     TransitionComponent={Transition}
@@ -187,7 +104,7 @@ class AddGuestModal extends Component {
                                 label="Guest name"
                                 type="text"
                                 className={classes.textField}
-                                value={this.state.value}
+                                //value={this.state.value}
                                 helperText="Some important text"
                                 placeholder="Enter guest name"
                                 //onChange={(event) => { this.setState({guestName: event.target.value}) }} 
@@ -209,11 +126,11 @@ class AddGuestModal extends Component {
                                     },
                                 }}
                                 margin="normal">
-                                {/* {currencies.map(option => (
+                                {currencies.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
-                                ))} */}
+                                ))}
                             </TextField>
                             <TextField
                                 id="confirmedGuests"
@@ -221,7 +138,7 @@ class AddGuestModal extends Component {
                                 type="number"
                                 value={this.state.value}
                                 placeholder="Enter number"
-                                //  onChange={(event) => { this.setState({ confirmedGuests: event.target.value }) }}
+                              //  onChange={(event) => { this.setState({ confirmedGuests: event.target.value }) }}
 
                                 className={classes.textField}
                                 InputLabelProps={{
@@ -261,38 +178,7 @@ class AddGuestModal extends Component {
                 </Dialog>
             </div>
         );
-
-    }
-
-
-
-    render() {
-        const { classes } = this.props;
-        // const AddGuestModal = ({ handleClose, show, children }) => {
-        // const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
-        return (
-            <div>
-                <div>
-                    <Button
-                        variant="extendedFab"
-                        color="primary"
-                        aria-label="Add"
-                        className={classes.button}
-                        onClick={this.handleClickOpen}>
-                        <AddIcon className={classes.extendedIcon} />
-                        add guest </Button>
-                </div>
-{this.dialogChildren()}
-            </div>
-            // <Popup
-            //     trigger={<button className="button btn-primary"> Add Guest </button>}
-            //     modal
-            //     closeOnDocumentClick
-            // >
-            //     {this.modalChildren()}
-            // </Popup>
-        );
     }
 }
 
-export default withStyles(styles)(AddGuestModal);
+export default withStyles(styles)(AlertDialogSlide);

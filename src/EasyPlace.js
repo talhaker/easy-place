@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
-
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import ActionRegion from './ActionRegion';
 import AddGuestModal from './AddGuestModal.js';
 import AddTableModal from './AddTableModal.js';
 import AddCategoryModal from './AddCategoryModal.js';
 import GuestList from './GuestList.js';
 import TableList from './TableList.js';
+import './App.css';
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        alignContent: 'left',
+        padding: theme.spacing.unit * 2,
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+
+    },
+});
 
 class EasyPlace extends Component {
     constructor(props) {
@@ -22,7 +39,7 @@ class EasyPlace extends Component {
             guests: prevState
                 .guests
                 .concat(guestInfo)
-            }
+        }
         ));
 
         console.log('handleAddGuest: ' + guestInfo);
@@ -108,19 +125,39 @@ class EasyPlace extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
-                <h1><i>Welcome to EasyPlace</i></h1>
-                <h3><i>The Ultimate App for Easily Seating Your Guests!</i></h3>
-                <GuestList guests={this.state.guests} />
-                <TableList guests={this.state.guests} tables={this.state.tables} />
-                <AddGuestModal handleAdd={this.handleAddGuest} categories={this.state.categories} />
+                {/* <AddGuestModal handleAdd={this.handleAddGuest} categories={this.state.categories} />
                 <AddTableModal handleAdd={this.handleAddTable} categories={this.state.categories} />
-                <AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} />
+                <AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} /> */}
+                <div className="sidebar" >
+                    <header>
+                        <h1>Easy Place</h1>
+                    </header>
+                      <ActionRegion/>
+                    
+                    {/* <Grid container spacing={3}>
+                        <Grid item xs={1}>
+                            
+                        </Grid>
+                        <Grid item xs={1}>
+                            <Paper className={classes.paper}>
+                                <AddGuestModal show={this.state.showAddGuestModal} handleAdd={this.handleAddGuest} />
+                            </Paper>
+                        </Grid>
 
-            </div>
+                    </Grid> */}
+                    <GuestList guests={this.state.guests} />
+                </div>
+
+                <div className="teble-canvas" >                
+                    <TableList guests={this.state.guests} tables={this.state.tables} />
+                </div>
+            </div >
         );
     }
 }
 
-export default EasyPlace;
+export default withStyles(styles)(EasyPlace);
+//export default EasyPlace;
