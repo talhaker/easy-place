@@ -13,6 +13,8 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import green from '@material-ui/core/colors/green';
+import AlertDialogSlide from './addGroup';
+import AddGuestModal from './AddGuestModal';
 
 function TabContainer(props) {
   const { children, dir } = props;
@@ -32,7 +34,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-    width: 500,
+    width: 300,
     position: 'relative',
     minHeight: 200,
   },
@@ -47,7 +49,7 @@ const styles = theme => ({
   },
 });
 
-class FloatingActionButtonZoom extends React.Component {
+class ActionRegion extends React.Component {
   state = {
     value: 0,
   };
@@ -67,23 +69,23 @@ class FloatingActionButtonZoom extends React.Component {
       exit: theme.transitions.duration.leavingScreen,
     };
 
-    const fabs = [
-      {
-        color: 'primary',
-        className: classes.fab,
-        icon: <AddIcon />,
-      },
-      {
-        color: 'secondary',
-        className: classes.fab,
-        icon: <EditIcon />,
-      },
-      {
-        color: 'inherit',
-        className: classNames(classes.fab, classes.fabGreen),
-        icon: <UpIcon />,
-      },
-    ];
+    // const fabs = [
+    //   {
+    //     color: 'primary',
+    //     className: classes.fab,
+    //     icon: <AddIcon />,
+    //   },
+    //   {
+    //     color: 'secondary',
+    //     className: classes.fab,
+    //     icon: <EditIcon />,
+    //   },
+    //   {
+    //     color: 'inherit',
+    //     className: classNames(classes.fab, classes.fabGreen),
+    //     icon: <UpIcon />,
+    //   },
+    // ];
 
     return (
       <div className={classes.root}>
@@ -95,9 +97,8 @@ class FloatingActionButtonZoom extends React.Component {
             textColor="primary"
             fullWidth
           >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
+            <Tab label="Guests" />
+            <Tab label="Tebles" />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -105,11 +106,12 @@ class FloatingActionButtonZoom extends React.Component {
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <TabContainer dir={theme.direction}>Guests</TabContainer>
+          <TabContainer dir={theme.direction}>
+          <AddGuestModal/>
+          </TabContainer>
           <TabContainer dir={theme.direction}>Tebles</TabContainer>
-          <TabContainer dir={theme.direction}>Item Three</TabContainer>
         </SwipeableViews>
-        {fabs.map((fab, index) => (
+        {/* {fabs.map((fab, index) => (
           <Zoom
             key={fab.color}
             in={this.state.value === index}
@@ -123,7 +125,7 @@ class FloatingActionButtonZoom extends React.Component {
               {fab.icon}
             </Button>
           </Zoom>
-        ))}
+        ))} */}
       </div>
     );
   }
@@ -134,4 +136,4 @@ FloatingActionButtonZoom.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(FloatingActionButtonZoom);
+export default withStyles(styles, { withTheme: true })(ActionRegion);

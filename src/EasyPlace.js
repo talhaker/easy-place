@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AlertDialogSlide from './addGroup';
-import FloatingActionButtonZoom from './ActionButtons';
+import ActionRegion from './ActionRegion';
 import AddGuestModal from './AddGuestModal.js';
 import GuestList from './GuestList.js';
 import TableList from './TableList.js';
@@ -98,9 +97,8 @@ class EasyPlace extends Component {
                     <header>
                         <h1>Easy Place</h1>
                     </header>
-                    <Paper className={classes.paper}>
-                        <FloatingActionButtonZoom></FloatingActionButtonZoom>
-                    </Paper>
+                      <ActionRegion/>
+                    
                     {/* <Grid container spacing={3}>
                         <Grid item xs={1}>
                             
