@@ -131,7 +131,7 @@ class ActionRegion extends React.Component {
   }
 }
 
-FloatingActionButtonZoom.propTypes = {
+ActionRegion.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
