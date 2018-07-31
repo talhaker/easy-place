@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel, Label, Button, Row, Col } from 'react-bootstrap';
-import 'react-select/dist/react-select.css';
-import 'react-virtualized/styles.css'
-import 'react-virtualized-select/styles.css'
 import Popup from "reactjs-popup";
 import './Popup.css';
 
