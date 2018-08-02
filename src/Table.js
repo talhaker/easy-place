@@ -1,48 +1,60 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Guest from './Guest';
+import { Droppable } from 'react-beautiful-dnd';
+//!!Organizing temp layout
+import styled from 'styled-components'
 
-// import PropTypes from 'prop-types';
+//!!Organizing temp layout
+const Container = styled.div `
+    margin: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+`;
+
+const Wrapper = styled.div`
+    margin: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    width: auto;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+`;
+
+const GuestLook = styled.div`
+    margin: 8px;
+    border: 1px solid lightgrey;
+    border-radius: 2px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+`;
 
 class Table extends Component {
 
-    // Add a guest to table
-    addGuest = () => {
-        // Add code here
-    }
-
-    // Remove a guest from table
-    removeGuest = () => {
-        // Add code here
-    }
-
     render() {
-        const displayTableInfo = (
-            <div>
-                <h3>Table {this.props.tableInfo.tableName}</h3>
-                <h4>Size {this.props.tableInfo.tableSize}, Category {this.props.tableInfo.category}</h4>
-            </div>
-        );
 
-        const guests = this.props
-            .tableInfo
-            .guests
-            .map((item, index) =>
-                <Guest
-                    key={index}
-                    guestInfo={item}
-                />)
+        const guests = this
+            .props
+            .tables[this.props.index].guests
+            .map((guest, index) => <GuestLook key={index} ><Guest guest={guest} deleteGuest={this.props.deleteGuest} /></GuestLook>)
 
         return (
             <div>
-                {displayTableInfo}
-                {guests}
+                <Wrapper>
+                {this.props.table.tableName}
+                    {guests}
+                </Wrapper>
+
             </div>
         );
     }
 }
-
-Table.propTypes = {
-
-};
 
 export default Table;

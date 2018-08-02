@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Label, FormControl, Button, Row, Col } from 'react-bootstrap';
+import { Label, FormControl, Button } from 'react-bootstrap';
 import Popup from "reactjs-popup";
 import './Popup.css';
 

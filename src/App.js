@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import EasyPlace from './EasyPlace.js';
+
 import './App.css';
+import EasyPlace from './EasyPlace.js';
+
+//!!Organizing temp layoesut
+import styled from 'styled-components'
+
+//!!Organizing temp layout
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <EasyPlace/>
-      </div>
-    );
-  }
+
+    render() {
+        return (
+            <EasyPlace />
+        );
+    }
 }
 
 export default App;
