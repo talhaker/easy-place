@@ -1,38 +1,51 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, Label, Button, Row, Col } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Label, Button } from 'react-bootstrap';
 import Popup from "reactjs-popup";
 import './Popup.css';
+import uniqueId from 'react-html-id';
+
+let counter = 0;
 
 class AddGuestModal extends Component {
     constructor(props) {
         super(props);
+        
         this.state = {
+            
             // guestNames: [],
+            id: 0,
             guestName: "",
             photo: "",
             category: "",
             confirmedGuests: 0,
             unconfirmedGuests: 0
         }
+        uniqueId.enableUniqueIds(this);
     }
 
-    addGuest = (event) => {
+    handleAddGuest = () => {
         let guestInfo = {
+            id: counter++,
             name: this.state.guestName,
             photo: this.state.photo,
             category: this.state.category,
             confirmed: this.state.confirmedGuests,
             unconfirmed: this.state.unconfirmedGuests
         }
+        // console.log(JSON.stringify(guestInfo))
+
+        this.props.handleAddGuest(guestInfo);
+        console.log(this.props.guestArr)
 
         this.setState({
+            id: counter,
             guestName: "",
             photo: "",
             category: "",
             confirmedGuests: 0,
             unconfirmedGuests: 0
         });
-        this.props.handleAdd(guestInfo);
+        
     }
 
     handleTextChange = event => {
@@ -101,7 +114,7 @@ class AddGuestModal extends Component {
                         onChange={this.handleTextChange}
                     />
                     <FormControl.Feedback />
-                    <Button bsStyle="primary" onClick={this.addGuest}>Add to guest list</Button>
+                    <Button bsStyle="primary" onClick={this.handleAddGuest}>Add to guest list</Button>
                 </form>
             </div>
         );

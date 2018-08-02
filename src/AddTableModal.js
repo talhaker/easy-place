@@ -1,34 +1,46 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, Label, Button, Row, Col } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Label, Button } from 'react-bootstrap';
+import 'react-select/dist/react-select';
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
 import Popup from "reactjs-popup";
 import './Popup.css';
+import uniqueId from 'react-html-id';
+
+let counter = 1;
 
 class AddTableModal extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
+            id: 0,
             tableName: "",
             tableSize: 12,
             category: "",
             guests: []
         }
+        uniqueId.enableUniqueIds(this);
     }
 
     addTable = () => {
         let tableInfo = {
+            id: counter++,
             tableName: this.state.tableName,
             tableSize: this.state.tableSize,
             category: this.state.category,
             guests: this.state.guests
         }
 
-        this.props.handleAdd(tableInfo);
         this.setState({
+            id: counter,
             tableName: "",
-            tableSize: 12,
+            tableSize: 8,
             category: "",
             guests: []
-        });
+        }, () => this.props.handleAdd(tableInfo));
+
+        console.log(tableInfo)
+        console.log(this.props.tablesArr)
     }
 
     handleTextChange = event => {
