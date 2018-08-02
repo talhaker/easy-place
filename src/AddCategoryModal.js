@@ -3,7 +3,7 @@
 // import Popup from "reactjs-popup";
 // import './Popup.css';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -12,14 +12,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
 import DeleteIcon from "@material-ui/icons/Delete";
 import NavigationIcon from "@material-ui/icons/Navigation";
-
+import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
@@ -46,7 +45,7 @@ const styles = theme => ({
     },
     iconSmall: {
         fontSize: 15,
-      }
+    }
 });
 
 function Transition(props) {
@@ -64,7 +63,9 @@ class AddCategoryModal extends Component {
 
     addCategory = () => {
         let category = this.state.category;
-        this.setState({ category: "", open: false }, () => this.props.handleAddCategory(category));
+
+        this.props.handleAddCategory(category);
+        this.handleClose();
     }
 
     handleClickOpen = () => {
@@ -72,7 +73,10 @@ class AddCategoryModal extends Component {
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({
+            category: "",
+            open: false
+        });
     };
 
     handleTextChange = event => {
@@ -91,8 +95,9 @@ class AddCategoryModal extends Component {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description">
                     <DialogTitle id="alert-dialog-slide-title">
-                        Add Category
+                    Create new category
                     </DialogTitle>
+                    <Divider></Divider>
                     {/* <DialogContentText id="alert-dialog-slide-description">
                         Some important textץ
             </DialogContentText> */}
@@ -101,23 +106,19 @@ class AddCategoryModal extends Component {
                             <TextField
                                 required
                                 id="category"
-                                label="Category List"
+                                label="Category"
                                 type="text"
                                 className={classes.textField}
                                 value={this.state.category}
                                 onChange={this.handleTextChange}
-                                helperText="Some important text"
-                                placeholder="Enter table category"
+                                placeholder="Enter category"
                                 margin="normal" />
                         </form>
                     </DialogContent>
+                    <Divider></Divider>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-            </Button>
-                        <Button onClick={this.addCategory} color="primary">
-                            Add
-            </Button>
+                        <Button size="small" onClick={this.handleClose}>Cancel</Button>
+                        <Button size="small" color="primary" onClick={this.addCategory} > Save </Button>
                     </DialogActions>
                 </Dialog>
             </div>

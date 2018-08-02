@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
+
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Slide from "@material-ui/core/Slide";
 
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import AddIcon from "@material-ui/icons/Add";
 import Icon from "@material-ui/core/Icon";
 import DeleteIcon from "@material-ui/icons/Delete";
 import NavigationIcon from "@material-ui/icons/Navigation";
-
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
+
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
 
 const styles = theme => ({
     container: {
@@ -41,7 +42,7 @@ const styles = theme => ({
     },
     iconSmall: {
         fontSize: 15,
-      }
+    }
 });
 
 function Transition(props) {
@@ -60,7 +61,7 @@ class AddGuestModal extends Component {
             confirmedGuests: 0,
             unconfirmedGuests: 0
         }
-    }  
+    }
 
     addGuest = (event) => {
         let guestInfo = {
@@ -70,15 +71,7 @@ class AddGuestModal extends Component {
             confirmed: this.state.confirmedGuests,
             unconfirmed: this.state.unconfirmedGuests
         }
-
-        this.setState({
-            guestName: "",
-            photo: "",
-            category: "",
-            confirmedGuests: 0,
-            unconfirmedGuests: 0,
-            open: false
-        });
+        this.handleClose();
         this.props.handleAddGuest(guestInfo);
     }
 
@@ -87,7 +80,14 @@ class AddGuestModal extends Component {
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({
+            guestName: "",
+            photo: "",
+            category: "",
+            confirmedGuests: "",
+            unconfirmedGuests: "",
+            open: false
+        });
     };
 
     handleTextChange = event => {
@@ -99,8 +99,14 @@ class AddGuestModal extends Component {
     }
 
     categoryChange = (event) => {
-        this.setState({ category: this.inputElem.value });
+        this.setState({ category: event.target.value });
     }
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
 
     // modalChildren = () => {
     //     const options = this.props
@@ -175,8 +181,9 @@ class AddGuestModal extends Component {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description">
                     <DialogTitle id="alert-dialog-slide-title">
-                        Add Guest
+                        Add guest
                     </DialogTitle>
+                    <Divider></Divider>
                     {/* <DialogContentText id="alert-dialog-slide-description">
                         Some important textץ
             </DialogContentText> */}
@@ -189,15 +196,15 @@ class AddGuestModal extends Component {
                                 type="text"
                                 className={classes.textField}
                                 value={this.state.guestName}
-                                helperText="Some important text"
                                 placeholder="Enter guest name"
+                                //onChange={this.handleChange('name')}
                                 onChange={this.handleTextChange}
                                 margin="normal" />
                             <TextField
                                 required
                                 select
-                                id="Category"
-                                label="Category of guest"
+                                id="category"
+                                label="Category"
                                 type="text"
                                 className={classes.textField}
                                 value={this.state.category}
@@ -210,7 +217,7 @@ class AddGuestModal extends Component {
                                 }}
                                 margin="normal">
                                 {this.props.categories
-                                    .sort().map((category, index) => 
+                                    .sort().map((category, index) =>
                                         <MenuItem key={index} value={category}>
                                             {category}
                                         </MenuItem>
@@ -250,13 +257,10 @@ class AddGuestModal extends Component {
                         </form>
 
                     </DialogContent>
+                    <Divider />
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            Cancel
-            </Button>
-                        <Button onClick={this.addGuest} color="primary">
-                            Add
-            </Button>
+                        <Button size="small" onClick={this.handleClose}>Cancel</Button>
+                        <Button size="small" color="primary" onClick={this.addGuest} > Save </Button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -277,8 +281,10 @@ class AddGuestModal extends Component {
                         aria-label="add Category "
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <AddIcon className={classes.iconSmall} />
-                        Add Guest </Button>
+                        <i class="material-icons">
+                            supervised_user_circle
+                        </i> <span>&nbsp;&nbsp;</span>Add Guest
+                    </Button>
                 </div>
                 {this.dialogChildren()}
             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Guest from './Guest';
 
+import CardsContainer from './CardsContainer';
 // import PropTypes from 'prop-types';
 
 class Table extends Component {
@@ -30,12 +31,15 @@ class Table extends Component {
                 <Guest
                     key={index}
                     guestInfo={item}
-                />)
+                    />)
 
         return (
             <div>
-                {displayTableInfo}
-                {guests}
+                {/* {displayTableInfo}
+                {guests} */}
+                <CardsContainer tableInfo={this.props.tableInfo}>
+               
+                </CardsContainer>
             </div>
         );
     }

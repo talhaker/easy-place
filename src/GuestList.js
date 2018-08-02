@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
 import Guest from './Guest';
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+    root: {
+        width: 300,
+        overflowX: 'hidden', /* Hide horizontal scrollbar */
+        overflowY: 'scroll', /* Add vertical scrollbar */
+    },
+});
+
+
+
+
 
 class GuestList extends Component {
     // Add an existing Guest back (from table) to list
@@ -13,6 +26,7 @@ class GuestList extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         const guests = this.props
             .guests
             .map((item, index) =>
@@ -21,11 +35,10 @@ class GuestList extends Component {
                     guestInfo={item}
                 />)
         return (
-            <div>
+            <div  className={classes.root}>
                 {guests}
             </div>
         );
     }
 }
-
-export default GuestList;
+export default withStyles(styles)(GuestList);

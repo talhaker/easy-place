@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import SwipeableViews from 'react-swipeable-views';
@@ -14,7 +14,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import green from '@material-ui/core/colors/green';
 import AddGuestModal from './AddGuestModal';
-import AddCategoryModal from './AddCategoryModal.js';
+import AddCategoryModal from './AddCategoryModal';
+import AddTableModal from './AddTableModal';
 
 function TabContainer(props) {
   const { children, dir } = props;
@@ -47,6 +48,10 @@ const styles = theme => ({
     color: theme.palette.common.white,
     backgroundColor: green[500],
   },
+  row: {
+    display: 'flex',
+    justifyContent: 'center',
+  }
 });
 
 class ActionRegion extends React.Component {
@@ -107,10 +112,14 @@ class ActionRegion extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer dir={theme.direction}>
-          <AddGuestModal  handleAddGuest={this.props.handleAddGuest} categories={this.props.categories}/>
-          <AddCategoryModal handleAddCategory={this.props.handleAddCategory} categories={this.props.categories}></AddCategoryModal>
+            <div className={classes.row}>
+              <AddGuestModal handleAddGuest={this.props.handleAddGuest} categories={this.props.categories} />
+              <AddCategoryModal handleAddCategory={this.props.handleAddCategory} categories={this.props.categories}></AddCategoryModal>
+            </div>
           </TabContainer>
-          <TabContainer dir={theme.direction}>Tebles</TabContainer>
+          <TabContainer dir={theme.direction}>
+            <AddTableModal handleAddTable={this.props.handleAddTable} categories={this.props.categories}></AddTableModal>
+          </TabContainer>
         </SwipeableViews>
         {/* {fabs.map((fab, index) => (
           <Zoom

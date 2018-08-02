@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import ActionRegion from './ActionRegion';
-import AddGuestModal from './AddGuestModal.js';
-import AddTableModal from './AddTableModal.js';
-import AddCategoryModal from './AddCategoryModal.js';
-import GuestList from './GuestList.js';
-import TableList from './TableList.js';
+import AddGuestModal from './AddGuestModal';
+import AddTableModal from './AddTableModal';
+import AddCategoryModal from './AddCategoryModal';
+import GuestList from './GuestList';
+import TableList from './TableList';
 import './App.css';
 
 const styles = theme => ({
@@ -61,7 +62,7 @@ class EasyPlace extends Component {
             tables: prevState
                 .tables
                 .concat(tableInfo)
-            }
+        }
         ));
 
         console.log('handleAddTable: ' + tableInfo);
@@ -84,7 +85,7 @@ class EasyPlace extends Component {
             categories: prevState
                 .categories
                 .concat(category)
-            }
+        }
         ));
 
         console.log('handleAddTable: ' + category);
@@ -133,10 +134,16 @@ class EasyPlace extends Component {
                 <AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} /> */}
                 <div className="sidebar" >
                     <header>
-                        <h1>Easy Place</h1>
-                    </header>
-                      <ActionRegion handleAddGuest={this.handleAddGuest} handleAddCategory={this.handleAddCategory} categories={this.state.categories} />
+                    <i class="material-icons">
+                                widgets
+                                </i><span>&nbsp;&nbsp;</span>
+                    <Typography variant="title" gutterBottom>
                     
+                            Easy Place
+                             </Typography>
+                    </header>
+                    <ActionRegion handleAddGuest={this.handleAddGuest} handleAddCategory={this.handleAddCategory} handleAddTable={this.handleAddTable} categories={this.state.categories} />
+
                     {/* <Grid container spacing={3}>
                         <Grid item xs={1}>
                             
@@ -151,8 +158,8 @@ class EasyPlace extends Component {
                     <GuestList guests={this.state.guests} />
                 </div>
 
-                <div className="teble-canvas" >                
-                    <TableList guests={this.state.guests} tables={this.state.tables} />
+                <div className="teble-canvas" >
+                    <TableList tables={this.state.tables} />
                 </div>
             </div >
         );
