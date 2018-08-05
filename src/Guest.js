@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {
-    Paper,
-    Typography,
     TextField,
-    Button,
     withStyles,
-    Divider,
-    Badge
+    Badge,
+    Chip,
+    ExpansionPanel,
+    ExpansionPanelDetails,
+    ExpansionPanelSummary,
+    ExpansionPanelActions
 } from '@material-ui/core'
 
-
+// import {
+//     ExpandMoreIcon,        
+// } from '@material-ui/icons'
 
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 //import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Chip from '@material-ui/core/Chip';
-import IconButton from '@material-ui/core/IconButton';
-import MailIcon from '@material-ui/icons/Mail';
-import Avatar from '@material-ui/core/Avatar';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#4A6572' }, // Purple and green play nicely together.
+    secondary: { main: '#4A6572' }, // This is just green.A700 as hex.
+  },
+});
 
 const styles = theme => ({
     root: {
-        width: 280,
+        width: 310,
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -79,8 +82,7 @@ const styles = theme => ({
         width: 30,
     },
     badge: {
-        width: 20,
-        marginLeft: 20,
+        backgroundColor: '#4A6572',
     },
     panal: {
         marginTop: 8,
@@ -88,7 +90,8 @@ const styles = theme => ({
         marginRight: 4,
     },
     chip: {
-        width: 60
+        width: 60,
+        
     },
 });
 
@@ -113,9 +116,11 @@ class Guest extends Component {
                 <ExpansionPanel className={classes.panal} >
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <div className={classes.column}>
-                            <Badge color="primary" badgeContent={sum}>
+                        <MuiThemeProvider theme={theme}>
+                            <Badge color="primary" badgeContent={sum}  >
                                 <Chip label={this.props.guestInfo.name} className={classes.chip} />
                             </Badge>
+                            </MuiThemeProvider>
                         </div>
                         <div className={classes.column}>
                             <Chip label={category} className={classes.chip}/>

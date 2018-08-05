@@ -15,6 +15,9 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
     },
+    title:{
+        color: 'white',
+    },
     paper: {
         alignContent: 'left',
         padding: theme.spacing.unit * 2,
@@ -134,27 +137,17 @@ class EasyPlace extends Component {
                 <AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} /> */}
                 <div className="sidebar" >
                     <header>
-                    <i class="material-icons">
+                        <i class="material-icons">
                                 widgets
                                 </i><span>&nbsp;&nbsp;</span>
-                    <Typography variant="title" gutterBottom>
+                    <Typography variant="title" className={classes.title} gutterBottom>
                     
                             Easy Place
                              </Typography>
                     </header>
                     <ActionRegion handleAddGuest={this.handleAddGuest} handleAddCategory={this.handleAddCategory} handleAddTable={this.handleAddTable} categories={this.state.categories} />
 
-                    {/* <Grid container spacing={3}>
-                        <Grid item xs={1}>
-                            
-                        </Grid>
-                        <Grid item xs={1}>
-                            <Paper className={classes.paper}>
-                                <AddGuestModal show={this.state.showAddGuestModal} handleAdd={this.handleAddGuest} />
-                            </Paper>
-                        </Grid>
-
-                    </Grid> */}
+                    
                     <GuestList guests={this.state.guests} />
                 </div>
 

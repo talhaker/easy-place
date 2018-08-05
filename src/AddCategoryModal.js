@@ -11,7 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
-
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 
 import AddIcon from "@material-ui/icons/Add";
@@ -37,8 +37,10 @@ const styles = theme => ({
         width: 200,
     },
     button: {
-        margin: theme.spacing.unit,
+        backgroundColor: '#4A6572',
+        // margin: theme.spacing.unit,
         width: 160,
+        fontSize: 13,
     },
     extendedIcon: {
         marginRight: theme.spacing.unit
@@ -95,7 +97,7 @@ class AddCategoryModal extends Component {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description">
                     <DialogTitle id="alert-dialog-slide-title">
-                    Create new category
+                        Create new category
                     </DialogTitle>
                     <Divider></Divider>
                     {/* <DialogContentText id="alert-dialog-slide-description">
@@ -156,8 +158,11 @@ class AddCategoryModal extends Component {
                         aria-label="add Category"
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <AddIcon className={classes.iconSmall} />
-                        add Category </Button>
+                        <i class="material-icons">
+                        bookmark_border
+                        </i><span>&nbsp;&nbsp;</span>
+                        Add Category
+                    </Button>
                 </div>
                 {this.dialogChildren()}
             </div>

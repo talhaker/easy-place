@@ -4,9 +4,11 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
     root: {
-        width: 300,
+        width: 330,
         overflowX: 'hidden', /* Hide horizontal scrollbar */
-        overflowY: 'scroll', /* Add vertical scrollbar */
+        overflowY: 'auto', /* Add vertical scrollbar */
+        position: 'relative',
+        height: 800,
     },
 });
 

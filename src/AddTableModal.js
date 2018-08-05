@@ -35,8 +35,10 @@ const styles = theme => ({
         width: 200,
     },
     button: {
-        margin: theme.spacing.unit,
-        width: 160
+        backgroundColor: '#4A6572',
+        // margin: theme.spacing.unit,
+        width: 160,
+        fontSize: 13,       
     },
     extendedIcon: {
         marginRight: theme.spacing.unit
@@ -71,7 +73,7 @@ class AddTableModal extends Component {
         }
         this.props.handleAddTable(tableInfo);
         this.handleClose();
-        
+
     }
 
     handleClickOpen = () => {
@@ -252,7 +254,9 @@ class AddTableModal extends Component {
                         aria-label="add Category "
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <AddIcon className={classes.iconSmall} />
+                        <i class="material-icons">
+                            view_carousel
+</i><span>&nbsp;&nbsp;</span>
                         Add Table </Button>
                 </div>
                 {this.dialogChildren()}

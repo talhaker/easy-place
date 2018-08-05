@@ -34,8 +34,10 @@ const styles = theme => ({
         width: 200,
     },
     button: {
-        margin: theme.spacing.unit,
-        width: 160
+        backgroundColor: '#4A6572',
+        // margin: theme.spacing.unit,
+        width: 160,
+        fontSize: 13,
     },
     extendedIcon: {
         marginRight: theme.spacing.unit
