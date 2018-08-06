@@ -11,9 +11,7 @@ class AddGuestModal extends Component {
         super(props);
         
         this.state = {
-            
-            // guestNames: [],
-            id: 0,
+            id: '',
             guestName: "",
             photo: "",
             category: "",
@@ -25,7 +23,7 @@ class AddGuestModal extends Component {
 
     handleAddGuest = () => {
         let guestInfo = {
-            id: counter++,
+            id: 'guest-' + counter++,
             name: this.state.guestName,
             photo: this.state.photo,
             category: this.state.category,
@@ -34,11 +32,10 @@ class AddGuestModal extends Component {
         }
         // console.log(JSON.stringify(guestInfo))
 
-        this.props.handleAddGuest(guestInfo);
-        console.log(this.props.guestArr)
+        this.props.handleAdd(guestInfo);
 
         this.setState({
-            id: counter,
+            id: '',
             guestName: "",
             photo: "",
             category: "",
