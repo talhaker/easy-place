@@ -291,6 +291,10 @@ class EasyPlace extends Component {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <div className='App'>
+                    <div className="title">
+                        <h1><i>EasyPlace</i></h1>
+                        <h2><i>The Ultimate App for Easy Seating of Your Guests!</i></h2>
+                    </div>
                     <Container>
                         <TableList
                             tables={this.state.tables}
