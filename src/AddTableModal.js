@@ -13,7 +13,7 @@ class AddTableModal extends Component {
     constructor() {
         super();
         this.state = {
-            id: 0,
+            id: '',
             tableName: "",
             tableSize: 12,
             category: "",
@@ -24,23 +24,22 @@ class AddTableModal extends Component {
 
     addTable = () => {
         let tableInfo = {
-            id: counter++,
+            id: 'table-' + counter++,
             tableName: this.state.tableName,
             tableSize: this.state.tableSize,
             category: this.state.category,
             guests: this.state.guests
         }
 
+        this.props.handleAdd(tableInfo);
+
         this.setState({
-            id: counter,
+            id: '',
             tableName: "",
             tableSize: 8,
             category: "",
             guests: []
-        }, () => this.props.handleAdd(tableInfo));
-
-        console.log(tableInfo)
-        console.log(this.props.tablesArr)
+        });
     }
 
     handleTextChange = event => {

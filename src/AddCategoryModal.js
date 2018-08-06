@@ -12,9 +12,8 @@ class AddCategoryModal extends Component {
     }
 
     addCategory = () => {
-        let category = this.state.category;
-
-        this.setState({ category: "" }, () => this.props.handleAdd(category));
+        this.props.handleAdd(this.state.category);
+        this.setState({ category: "" });
     }
 
     handleTextChange = event => {
@@ -29,7 +28,7 @@ class AddCategoryModal extends Component {
                     <FormControl
                         id="category"
                         type="text"
-                        value={this.state.value}
+                        value={this.state.category}
                         placeholder="Enter table category"
                         onChange={this.handleTextChange}
                     />
