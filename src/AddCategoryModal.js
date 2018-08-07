@@ -1,8 +1,3 @@
-// import React, { Component } from 'react';
-// import { Label, FormControl, Button, Row, Col } from 'react-bootstrap';
-// import Popup from "reactjs-popup";
-// import './Popup.css';
-
 import React, { Component, PropTypes } from 'react';
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -65,7 +60,6 @@ class AddCategoryModal extends Component {
 
     addCategory = () => {
         let category = this.state.category;
-
         this.props.handleAddCategory(category);
         this.handleClose();
     }
@@ -158,7 +152,7 @@ class AddCategoryModal extends Component {
                         aria-label="add Category"
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <i class="material-icons">
+                        <i className="material-icons">
                         bookmark_border
                         </i><span>&nbsp;&nbsp;</span>
                         Add Category

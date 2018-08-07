@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import Guest from './Guest';
 import { withStyles } from "@material-ui/core/styles";
+import { Droppable } from 'react-beautiful-dnd';
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+margin: 8px;
+
+width: auto;
+min-height: 220px;
+display: flex;
+flex-direction: column;
+width: 250px;
+transition: width 2s, height 4s;
+transition: background-color 0.2s ease;
+background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')}
+flex: 1;
+`;
 
 const styles = theme => ({
     root: {
@@ -8,38 +24,30 @@ const styles = theme => ({
         overflowX: 'hidden', /* Hide horizontal scrollbar */
         overflowY: 'auto', /* Add vertical scrollbar */
         position: 'relative',
-        height: 800,
+        //  height: 450,
+        justifyContent: 'center',
     },
 });
-
-
-
-
-
 class GuestList extends Component {
-    // Add an existing Guest back (from table) to list
-    addGuest = () => {
-        // Add code here
-    }
-
-    // Remove an existing Guest (moved to table) from list
-    removeGuest = () => {
-        // Add code here
-    }
-
     render() {
         const { classes } = this.props;
-        const guests = this.props
-            .guests
-            .map((item, index) =>
-                <Guest
-                    key={index}
-                    guestInfo={item}
-                />)
+        let firstGuests = this.props.table[0];
         return (
-            <div  className={classes.root}>
-                {guests}
-            </div>
+            <React.Fragment>
+                <Droppable droppableId={firstGuests.id}>
+                    {(provided, snapshot) => (
+                        <Wrapper innerRef={provided.innerRef}
+                            {...provided.droppableProps}
+                            isDraggingOver={snapshot.isDraggingOver}   >
+
+                            {firstGuests.guests.map((guestItem, index) =>
+                                <Guest guestItem={guestItem} index={index} guestId={guestItem.id}  tableId={firstGuests.id}/>
+                            )}
+                            {provided.placeholder}
+                        </Wrapper>
+                    )}
+                </Droppable>
+            </React.Fragment>
         );
     }
 }

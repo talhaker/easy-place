@@ -18,6 +18,9 @@ import Divider from '@material-ui/core/Divider';
 
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
+import uniqueId from 'react-html-id';
+
+let counter = 0;
 
 const styles = theme => ({
     container: {
@@ -56,17 +59,19 @@ class AddGuestModal extends Component {
         super(props);
         this.state = {
             open: false,
-            // guestNames: [],
+            id: '',
             guestName: "",
             photo: "",
             category: "",
             confirmedGuests: 0,
             unconfirmedGuests: 0
         }
+        uniqueId.enableUniqueIds(this);
     }
 
     addGuest = (event) => {
         let guestInfo = {
+            id: 'guest-'+counter++,
             name: this.state.guestName,
             photo: this.state.photo,
             category: this.state.category,
@@ -83,6 +88,7 @@ class AddGuestModal extends Component {
 
     handleClose = () => {
         this.setState({
+            id: '',
             guestName: "",
             photo: "",
             category: "",
@@ -283,7 +289,7 @@ class AddGuestModal extends Component {
                         aria-label="add Category "
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <i class="material-icons">
+                        <i className="material-icons">
                             supervised_user_circle
                         </i> <span>&nbsp;&nbsp;</span>Add Guest
                     </Button>

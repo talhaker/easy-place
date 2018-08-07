@@ -19,6 +19,12 @@ import NavigationIcon from "@material-ui/icons/Navigation";
 import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import 'react-select/dist/react-select';
+import 'react-virtualized/styles.css'
+import 'react-virtualized-select/styles.css'
+import uniqueId from 'react-html-id';
+
+let counter = 1;
 
 const styles = theme => ({
     container: {
@@ -53,19 +59,22 @@ function Transition(props) {
 }
 
 class AddTableModal extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             open: false,
+            id: '',
             tableName: "",
             tableSize: 12,
             category: "",
             guests: []
         }
+        uniqueId.enableUniqueIds(this);
     }
 
     addTable = () => {
         let tableInfo = {
+            id: 'table-'+counter++,
             tableName: this.state.tableName,
             tableSize: this.state.tableSize,
             category: this.state.category,
@@ -82,6 +91,7 @@ class AddTableModal extends Component {
 
     handleClose = () => {
         this.setState({
+            id: '',
             tableName: "",
             tableSize: 12,
             category: "",
@@ -254,7 +264,7 @@ class AddTableModal extends Component {
                         aria-label="add Category "
                         className={classes.button}
                         onClick={this.handleClickOpen}>
-                        <i class="material-icons">
+                        <i className="material-icons">
                             view_carousel
 </i><span>&nbsp;&nbsp;</span>
                         Add Table </Button>
