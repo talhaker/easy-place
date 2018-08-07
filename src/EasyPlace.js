@@ -481,19 +481,11 @@ class EasyPlace extends Component {
                     <div>
                         <ActionRegion handleAddGuest={this.handleAddGuest} handleAddCategory={this.handleAddCategory} handleAddTable={this.handleAddTable} categories={this.state.categories} />
                     </div>
-                    <DragDropContext onDragEnd={this.onTableDragEnd}>
-                    <div className="teble-canvas" >
-                        <Container>
-                            <TableList tables={this.state.tables} deleteGuest={this.deleteGuest}
-                                deleteTable={this.deleteTable} />
-                        </Container>
-                    </div>
-                </DragDropContext>
-                    {/* <DragDropContext onDragEnd={this.onGuestDragEnd}>
+                    <DragDropContext onDragEnd={this.onGuestDragEnd}>
                         <div className={classes.guests}>
                             <GuestList table={this.state.table} />
                         </div>
-                    </DragDropContext> */}
+                    </DragDropContext>
                 </div>
                 <DragDropContext onDragEnd={this.onTableDragEnd}>
                     <div className="teble-canvas" >
