@@ -6,22 +6,24 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
     margin: 8px;
-    width: auto;
-    min-height: 220px;
+    min-height: 280px;
     display: flex;
+    border-radius: 5px;
     flex-direction: column;
-    width: 250px;
     transition: width 2s, height 4s;
     transition: background-color 0.2s ease;
     background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')}
-    flex: 1;
+    flex: 1 0 auto;
+    width: 220px;
+    opacity: 0.8;
 `;
 
 const GuestLook = styled.div`
     margin: 8px;
     display: flex;
     flex-direction: column;
-    width:220px;
+    width: auto;
+    flex: 1;
 `;
 
 class Table extends Component {
@@ -29,25 +31,29 @@ class Table extends Component {
     render() {
 
         return (
-            <React.Fragment>
+            <div className="table">
                 <Droppable droppableId={this.props.table.id}>
                     {(provided, snapshot) => (
                         <Wrapper innerRef={provided.innerRef}
                             {...provided.droppableProps}
                             isDraggingOver={snapshot.isDraggingOver}
                         >
-                            {this.props.table.key !== 'table-0' &&
+                            {(this.props.table.id !== 'table-0') &&
                                 <button
                                     type="button"
-                                    className="btn-cus btn-danger btn-sm btn"
+                                    className="btn-cus btn-sm btn"
                                     onClick={()=> this.props.deleteTable(this.props.table.id)}
                                 >
                                     X
                                 </button>
                             }
-                            <div className="tableInfo">
-                                <h5><i>{this.props.table.tableName} ({this.props.table.category})</i></h5>
-                                <i>Table size: {this.props.table.tableSize}</i>
+                            <div className="table-info">
+                                <div className="table-name">
+                                    {this.props.table.tableName}
+                                </div>
+                                <div className="table-size">
+                                    {this.props.table.tableSize}
+                                </div>
                             </div>
                             {this.props.table.guests.map((guest, index) =>
                                 <GuestLook key={guest.id} >
@@ -64,9 +70,7 @@ class Table extends Component {
                         </Wrapper>
                     )}
                 </Droppable>
-            
-                </React.Fragment>
-
+            </div>
         );
     }
 }

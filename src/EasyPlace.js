@@ -289,24 +289,23 @@ class EasyPlace extends Component {
 
     render() {
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <div className='App'>
-                    <div className="title">
-                        <h1><i>EasyPlace</i></h1>
-                        <h2><i>The Ultimate App for Easy Seating of Your Guests!</i></h2>
+            <div className='App'>
+                <h1 className="headline">EasyPlace</h1>
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <div className='form-dashboard'>
+                    <div className="dashboard-buttons"><AddGuestModal handleAdd={this.handleAddGuest} categories={this.state.categories} guestArr={this.state.tables[0]} theState={this.state}/></div>
+                    <div className="dashboard-buttons"><AddTableModal handleAdd={this.handleAddTable} categories={this.state.categories} tablesArr={this.state.tables}/></div>
+                    <div className="dashboard-buttons"><AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} /></div>
                     </div>
-                    <Container>
-                        <TableList
-                            tables={this.state.tables}
-                            deleteGuest={this.deleteGuest}
-                            deleteTable={this.deleteTable}
-                        />
-                    </Container>
-                    <AddGuestModal handleAdd={this.handleAddGuest} categories={this.state.categories} guestArr={this.state.tables[0]} theState={this.state}/>
-                    <AddTableModal handleAdd={this.handleAddTable} categories={this.state.categories} tablesArr={this.state.tables}/>
-                    <AddCategoryModal handleAdd={this.handleAddCategory} categories={this.state.categories} />
-                </div>
-            </DragDropContext>
+                        <Container>
+                            <TableList
+                                tables={this.state.tables}
+                                deleteGuest={this.deleteGuest}
+                                deleteTable={this.deleteTable}
+                            />  
+                        </Container>    
+                </DragDropContext>
+            </div>
         );
     }
 }

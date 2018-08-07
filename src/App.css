@@ -8,12 +8,56 @@ body {
 
 .App {
     margin: 0 auto;
+    width: 2000px;
 }
 
 .btn-cus {
     width: 28px;
     height: 28px;
     text-align: left;
+    background-color: transparent;
+    color: red;
+}
+
+.table {
+    margin: 8px;
+}
+
+.guest:hover {
+    background-color: rgb(190, 237, 253);
+}
+
+.headline {
+    color: white;
+    font-size: 36px;
+    margin: 8px;
+}
+
+.form-dashboard {
+    margin: 12px;
+    padding: 5px;
+    display: flex;
+    flex-flow: row;
+}
+
+.table-info {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.dashboard-buttons {
+    margin: 5px;
+}
+
+.guest-name {
+    font-size: 22px;
+}
+
+.guest-info {
+    margin: 8px;
 }
 
 .title {
